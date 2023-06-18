@@ -3,10 +3,11 @@ const { Router } = require("express");
 const UserController = require("../controllers/user.controller");
 
 const router = Router();
+const validateJwt = require("../middlewares/jwtValidator")
 
 router.post('/create', UserController.createUser)
 
-router.get('/', UserController.getUsers)
+router.get('/', validateJwt, UserController.getUsers)
 
 router.get('/:id', UserController.getUserByID)
 
