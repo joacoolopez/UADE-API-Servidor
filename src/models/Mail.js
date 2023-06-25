@@ -6,7 +6,8 @@ const MailSchema = new Schema({
     lastname:String,
     email:String,
     nrotelefono:String,
-    comentario:String
+    comentario:String,
+    estado: Boolean
 });
 
 const Mail = mongoose.model('Mail', MailSchema);

@@ -9,10 +9,10 @@ router.post('/create', UserController.createUser)
 
 router.get('/', validateJwt, UserController.getUsers)
 
-router.get('/:id', UserController.getUserByID)
-
 router.get('/email/:email', UserController.getUserByMail)
 
 router.post('/login', UserController.login)
+
+router.get('/cant', UserController.getCountUsers)
 
 module.exports = router;

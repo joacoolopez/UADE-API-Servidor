@@ -21,6 +21,26 @@ class MailController {
             console.log(err)
         }
     }
+
+    async getMails(req, res){
+      try{
+        const mails = await mailService.getMails()
+        return res.status(200).json(mails)
+      }catch(error){
+        console.log(error)
+      }
+    }
+
+    async validateMail(req, res){
+      try{
+        const id = await mailService.validateMail(req.params.id)
+        return res.status(200).json(id)
+      }catch(err){
+        console.log(err)
+      }
+      
+    
+    }
 }
 
 module.exports = MailController.getInstance();

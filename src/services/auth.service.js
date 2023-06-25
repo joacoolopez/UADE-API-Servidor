@@ -6,7 +6,7 @@ class AuthService{
     async hasValidCredentials(email, password){
         try{
             const hashedPassword = await bcrypt.hash(password, process.env.SALT);
-            const user = await userModel.findOne({ email});
+            const user = await userModel.findOne({email});
 
             if (user && hashedPassword === user.password) {
                 return true;

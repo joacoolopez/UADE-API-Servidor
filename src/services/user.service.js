@@ -9,9 +9,16 @@ class UserService {
             if (isRegistred){
                 throw new Error("User already registred")
             }else{
-                user.password = bcrypt.hashSync(user.password, process.env.SALT)
-                await userModel.create(user);
-                return user;
+                const count = await userModel.countDocuments();
+                console.log(count)
+                if (count===0){
+                    user.password = bcrypt.hashSync(user.password, process.env.SALT)
+                    await userModel.create(user);
+                    return true;
+                }else{
+                    return false
+                }
+                
             }
         }catch(err){
             console.log(err)
@@ -46,6 +53,19 @@ class UserService {
         }
     }
 
+    async getCountUser(){
+        try{
+            const count = await userModel.countDocuments();
+            if (count>0){
+                return true;
+            }else{
+                return false;
+            }
+            
+        }catch(err){
+            throw new error ("Error in getCountUser service")
+        }
+    }
     
 }
 

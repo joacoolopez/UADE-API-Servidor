@@ -16,8 +16,7 @@ class UserController {
         try {
             let newUser = await userService.createUser(req.body);
             return res.status(201).json({
-                message: "Created!",
-                usuario: newUser,
+                estado: newUser,
               });
         }catch (err){
             console.log('Error, usuario ya existente')
@@ -33,17 +32,7 @@ class UserController {
             const users = await userService.getUsers();
             return res.status(200).json(users);
         } catch(err){
-            console.log("error")
-        }
-    }
-
-    async getUserByID(req, res){
-        try{
-            const id = req.params.id
-            const user = await userService.getUserByID(id);
-            return res.status(200).json(user);
-        } catch(err){
-            console.log("error")
+            console.log("error1")
         }
     }
 
@@ -53,7 +42,7 @@ class UserController {
             const user = await userService.getUserByMail(email);
             return res.status(200).json(user);
         } catch(err){
-            console.log("error")
+            console.log("error3")
         }
     }
 
@@ -72,11 +61,13 @@ class UserController {
                 return res.status(200).json({
                 status: 200,
                 token,
+                estado: true,
                 message: "Token created successfully."
                 });
             } else {
-                return res.status(401).json({
-                  message: "Unauthorized.",
+                return res.status(200).json({
+                estado: false,  
+                message: "Unauthorized.",
                 });
               }
             } catch (err) {
@@ -87,6 +78,19 @@ class UserController {
               });
             }
         }
+
+    async getCountUsers(req, res){
+        try{
+            const count = await userService.getCountUser();
+            return res.status(200).json({
+                estadoCountUser: count
+            });
+        }catch(err){
+            return res.status(200).json(err);
+        }
+        
+    }
+
     }
 
 
