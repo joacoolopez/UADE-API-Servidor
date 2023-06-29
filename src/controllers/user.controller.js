@@ -82,6 +82,7 @@ class UserController {
     async getCountUsers(req, res){
         try{
             const count = await userService.getCountUser();
+            console.log(count)
             return res.status(200).json({
                 estadoCountUser: count
             });
