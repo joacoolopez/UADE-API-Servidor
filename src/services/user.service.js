@@ -35,15 +35,6 @@ class UserService {
         }
     }
 
-    async getUserByID(id){
-        try{
-            const user = await userModel.findOne({_id:id});
-            return user;
-        }catch(err){
-            throw new error ("Error in getUserByID service")
-        }
-    }
-
     async getUserByMail(email){
         try{
             const user = await userModel.findOne({email:email});
